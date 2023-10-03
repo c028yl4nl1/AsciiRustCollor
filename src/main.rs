@@ -1,15 +1,8 @@
-
-
-
-
 use Erros::Cores::AsciiCor;
 
-fn main () {
-
-   
-    let String_text = String::from("Rust");
-
-    AsciiCor(String_text).Red();
-
-   
+fn main() {
+    let string_text = String::from("Rust");
+    AsciiCor(string_text.clone()).green();
+    AsciiCor(string_text.clone()).red();
+    AsciiCor(string_text.clone()).colored();
 }
