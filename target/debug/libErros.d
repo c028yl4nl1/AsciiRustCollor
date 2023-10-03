@@ -1,0 +1,1 @@
+F:\sources\play-rust\AsciiRustCollor\target\debug\libErros.rlib: F:\sources\play-rust\AsciiRustCollor\src\ascii.rs F:\sources\play-rust\AsciiRustCollor\src\convert.rs F:\sources\play-rust\AsciiRustCollor\src\lib.rs
