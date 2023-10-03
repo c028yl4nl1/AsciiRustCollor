@@ -1,24 +1,22 @@
 mod ascii;
 mod convert;
-use colored::{Color, ColoredString, Colorize};
-use convert::AsciiConvert;
-use rand::Rng;
+use colored::Colorize;
+use convert::ascii_convert;
 
-use std::io::{self, Write};
 // Resto do seu código...
 pub enum Cores {
     AsciiCor(String),
 }
 
-fn Convert(text: String) -> Result<String, String> {
-    AsciiConvert(text)
+fn convert(text: String, randomizer_color: bool) -> Result<String, String> {
+    ascii_convert(text, randomizer_color)
 }
 
 impl Cores {
-    pub fn Green(&self) -> bool {
+    pub fn green(&self) -> bool {
         match self {
             Cores::AsciiCor(valor) => {
-                if let Ok(text) = Convert(valor.to_string()) {
+                if let Ok(text) = convert(valor.to_string(), false) {
                     println!("{}", text.green());
                     true
                 } else {
@@ -28,10 +26,10 @@ impl Cores {
         }
     }
 
-    pub fn Red(&self) -> bool {
+    pub fn red(&self) -> bool {
         match self {
             Cores::AsciiCor(valor) => {
-                if let Ok(text) = Convert(valor.to_string()) {
+                if let Ok(text) = convert(valor.to_string(), false) {
                     println!("{}", text.red());
                     true
                 } else {
@@ -41,10 +39,10 @@ impl Cores {
         }
     }
 
-    pub fn Cyan(&self) -> bool {
+    pub fn cyan(&self) -> bool {
         match self {
             Cores::AsciiCor(valor) => {
-                if let Ok(text) = Convert(valor.to_string()) {
+                if let Ok(text) = convert(valor.to_string(), false) {
                     println!("{}", text.cyan());
                     true
                 } else {
@@ -54,10 +52,10 @@ impl Cores {
         }
     }
 
-    pub fn Yellow(&self) -> bool {
+    pub fn yellow(&self) -> bool {
         match self {
             Cores::AsciiCor(valor) => {
-                if let Ok(text) = Convert(valor.to_string()) {
+                if let Ok(text) = convert(valor.to_string(), false) {
                     println!("{}", text.yellow());
                     true
                 } else {
@@ -67,35 +65,13 @@ impl Cores {
         }
     }
 
-    pub fn Colored(&self) {
+    pub fn colored(&self) {
         match self {
             Cores::AsciiCor(valor) => {
-                let mut colored_string = String::new();
-
-                for letra in valor.chars() {
-                    if let Ok(text) = Convert(letra.to_string()) {
-                        let color = random_color();
-                        colored_string.push_str(&text.color(color).to_string());
-                    }
+                if let Ok(text) = convert(valor.to_string(), true) {
+                    println!("{}", text);
                 }
-
-                println!("{}", colored_string);
             }
-            _ => println!("s"),
         }
     }
-}
-
-fn random_color() -> Color {
-    let colors = [
-        Color::Red,
-        Color::Green,
-        Color::Yellow,
-        Color::Blue,
-        Color::Magenta,
-        Color::Cyan,
-    ];
-    let mut rng = rand::thread_rng();
-    let index = rng.gen_range(0..colors.len());
-    colors[index]
 }
